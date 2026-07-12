@@ -101,6 +101,9 @@
   .runbox{background:var(--code-bg);color:var(--code-ink);border-radius:16px;padding:20px 22px;position:relative;
     font-size:13px;line-height:1.7;white-space:pre-wrap}
   .runbox .copy{position:absolute;top:12px;right:12px}
+  /* buttons sitting on dark code surfaces keep code-ink colors in both themes */
+  .runbox .minibtn{color:var(--code-ink);border-color:rgba(217,212,242,.28);background:rgba(217,212,242,.06)}
+  .runbox .minibtn:hover{background:rgba(217,212,242,.14)}
   .clients{margin-top:14px;font-size:13px;color:var(--muted)}
 
   /* validator */
