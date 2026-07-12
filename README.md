@@ -137,12 +137,11 @@ file stays the source of truth; the UI is a viewer.
 
 ## Provenance
 
-This format wasn't designed on a whiteboard. The first loadout.md
-([`examples/content.loadout.md`](examples/content.loadout.md)) was executed
-end-to-end against a production MCP on 2026-07-11: it interviewed for config,
-studied live market signal, learned the account's voice from its post history,
-drafted a post, stopped at the gate — and the account owner approved the draft
-on the first pass and published it. The spec is extracted from what worked.
+This format wasn't designed on a whiteboard. It's extracted from loadout
+files running end-to-end against a production MCP — interviewing for config,
+working live data, stopping at the gate, shipping approved work. The
+[examples](examples/) are working files, not mockups; the spec documents what
+worked, not what sounded good.
 
 ## Contributing
 
