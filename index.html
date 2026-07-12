@@ -434,8 +434,9 @@ function validate(){
   add(tools.length >= 1 ? true : "warn", "Names real MCP tools (" + tools.length + ")",
       tools.length ? "" : "Steps should name the actual tools in backticks — that's what makes the file executable.");
 
-  var gate = /STOP\s*—?\s*approval gate|approval gate/i.test(stepSec ? stepSec[0] : md);
-  add(gate, "Approval gate", gate ? "" : "Non-negotiable #2: add a 'STOP — approval gate' step before anything irreversible.");
+  // the gate may live inside Steps or as its own "## STOP" section — both are valid
+  var gate = /STOP\s*[—-]?\s*approval gate|approval gate/i.test(md);
+  add(gate, "Approval gate", gate ? "" : "Non-negotiable #2: add a 'STOP — approval gate' step (inside Steps or as its own section) before anything irreversible.");
 
   var never = md.match(/##\s*Never[\s\S]*?(?=\n##\s|$)/);
   var neverN = never ? (never[0].match(/^-\s+/gm) || []).length : 0;
