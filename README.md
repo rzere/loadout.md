@@ -1,13 +1,16 @@
 # loadout.md
 
-**A `loadout.md` is a markdown file that makes an MCP smart.**
+**A `loadout.md` is a ready-to-run job for an AI agent** — the playbook,
+tools, guardrails, examples, and success criteria packaged into one portable
+markdown file. Readable by humans, executable by any agent with the right MCP
+connected.
 
-MCP gives an agent tools. A loadout gives those tools judgment: what to ask
-before acting, how to sequence the work, what to avoid, when to stop for human
-approval, and what "done" actually means. One file, readable by humans,
-executable by any agent with the right MCP connected.
+> **Workflows do steps. Loadouts do jobs.**
 
-> A Loadout doesn't just act. **It asks first.**
+A workflow says *"when X happens, do Y."* A loadout says *"here is how to win
+this whole job: what to ask, what to look for, what tools to use, when to stop
+for approval, and what good looks like."* MCP gives agents tools — a loadout
+tells them how to use those tools to win.
 
 This repository documents the format. It is deliberately small: the entire
 spec fits in one file you can read in five minutes, and the
