@@ -70,6 +70,79 @@
   .half.jud{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--panel))}
   .half.jud p{color:var(--ink)}
 
+  /* ===== steps-vs-job animated diagram ===== */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  @media(max-width:680px){.vs{grid-template-columns:1fr}}
+  .vs-col{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px 18px 14px}
+  .vs-col.lo{border-color:rgba(95,76,250,.45);background:linear-gradient(180deg,var(--accent-soft),var(--panel) 55%)}
+  .vs-k{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .vs-col.lo .vs-k{color:var(--accent-ink)}
+  .vs-goal{display:inline-block;font-size:11.5px;font-weight:700;color:var(--accent-ink);
+    background:var(--panel);border:1px dashed rgba(95,76,250,.5);border-radius:999px;padding:4px 11px;margin-bottom:12px}
+  .chain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:34px}
+  .node{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:11px;font-weight:600;
+    padding:6px 10px;border-radius:9px;background:var(--panel2);color:var(--muted);
+    border:1px solid var(--line);white-space:nowrap}
+  .arr{color:var(--line);font-size:12px;flex-shrink:0}
+  /* workflow side: uniform gray pulses, forever, ends in a fizzle */
+  .wf .node{animation:wfpulse 7s infinite}
+  .wf .n1{animation-delay:0s}.wf .n2{animation-delay:.9s}.wf .n3{animation-delay:1.8s}
+  .wf .n4{animation-delay:2.7s;font-style:italic}
+  @keyframes wfpulse{
+    0%,10%{background:var(--panel2);color:var(--muted);border-color:var(--line)}
+    4%{background:#dddbe8;color:var(--ink);border-color:#c9c6da}
+    100%{background:var(--panel2)}
+  }
+  .wf .n4{animation-name:wffizzle}
+  @keyframes wffizzle{
+    0%,38%{opacity:1}
+    42%{opacity:.35}
+    46%,52%{opacity:1;background:#dddbe8}
+    56%{opacity:.35}
+    62%,100%{opacity:.55}
+  }
+  /* loadout side: pulse travels, HOLDS at the gate, ends verified green */
+  .lo .node{animation:lopulse 7s infinite}
+  .lo .m1{animation-delay:0s}.lo .m2{animation-delay:.9s}.lo .m3{animation-delay:1.8s}
+  @keyframes lopulse{
+    0%,8%{background:var(--panel2);color:var(--muted);border-color:var(--line)}
+    4%{background:var(--accent-soft);color:var(--accent-ink);border-color:rgba(95,76,250,.5)}
+    100%{background:var(--panel2)}
+  }
+  .lo .gate{animation:logate 7s infinite;position:relative}
+  @keyframes logate{
+    0%,38%{background:var(--panel2);color:var(--muted);border-color:var(--line)}
+    41%,62%{background:var(--gate-soft);color:var(--gate);border-color:var(--gate);transform:scale(1.07);font-weight:800}
+    66%,100%{background:var(--panel2);color:var(--muted);transform:none}
+  }
+  .lo .gate .ok{position:absolute;top:-9px;right:-8px;font-size:9px;font-weight:800;
+    background:var(--ok);color:#fff;border-radius:99px;padding:1.5px 6px;opacity:0;
+    animation:gateok 7s infinite}
+  @keyframes gateok{0%,54%{opacity:0;transform:scale(.5)}58%,66%{opacity:1;transform:scale(1)}72%,100%{opacity:0}}
+  .lo .act{animation:loact 7s infinite}
+  @keyframes loact{
+    0%,66%{background:var(--panel2);color:var(--muted);border-color:var(--line)}
+    70%,76%{background:var(--accent-soft);color:var(--accent-ink);border-color:rgba(95,76,250,.5)}
+    80%,100%{background:var(--panel2)}
+  }
+  .lo .done{animation:lodone 7s infinite}
+  @keyframes lodone{
+    0%,78%{background:var(--panel2);color:var(--muted);border-color:var(--line)}
+    83%,94%{background:var(--ok-soft);color:var(--ok);border-color:var(--ok);transform:scale(1.07);font-weight:800}
+    100%{background:var(--panel2);transform:none}
+  }
+  .vs-note{font-size:12px;color:var(--muted);margin:12px 0 0}
+  .vs-col.lo .vs-note{color:var(--ink)}
+  .rails{margin-top:10px;font-size:10px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap}
+  .rails span{border:1px dashed var(--line);border-radius:99px;padding:2.5px 8px}
+  .rails .no{color:var(--err);border-color:rgba(201,42,37,.35)}
+  @media (prefers-reduced-motion: reduce){
+    .wf .node,.lo .node,.lo .gate,.lo .act,.lo .done,.lo .gate .ok{animation:none}
+    .lo .gate{background:var(--gate-soft);color:var(--gate);border-color:var(--gate)}
+    .lo .done{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
+    .lo .gate .ok{opacity:1}
+  }
+
   /* rules */
   .rules{display:grid;gap:12px}
   .rule{display:flex;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
@@ -151,14 +224,22 @@
   <div class="wrap">
     <h2>Tools are the floor</h2>
     <p class="sub">The market has settled the easy question — AI can control your apps through MCP. The hard question is whether it knows how to run the <b>job</b> well: a workflow says "when X, do Y"; a loadout says "here's how to win this whole outcome."</p>
-    <div class="split">
-      <div class="half">
-        <div class="k">Tools · steps</div>
-        <p>40 tools, zero context. The agent guesses your audience, invents your offer, sends before you've seen anything, and calls it done because it stopped.</p>
+    <div class="vs" aria-label="Workflows do steps, loadouts do jobs — animated comparison">
+      <div class="vs-col wf">
+        <div class="vs-k">A workflow · does steps</div>
+        <div class="chain">
+          <span class="node n1">when X</span><span class="arr">→</span><span class="node n2">do Y</span><span class="arr">→</span><span class="node n3">do Z</span><span class="arr">→</span><span class="node n4">…stopped?</span>
+        </div>
+        <p class="vs-note">No context, no gate. "Done" just means it ran out of steps — it fires again tomorrow whether it worked or not.</p>
       </div>
-      <div class="half jud">
-        <div class="k">A loadout · the job</div>
-        <p>Interviews you first. Works the playbook. Refuses what the file forbids. Slams to a stop at the approval gate. Proves the job is done with a verifiable check.</p>
+      <div class="vs-col lo">
+        <div class="vs-k">A loadout · wins the job</div>
+        <div class="vs-goal">🎯 the job: warm leads, safely</div>
+        <div class="chain">
+          <span class="node m1">ask</span><span class="arr">→</span><span class="node m2">see</span><span class="arr">→</span><span class="node m3">decide</span><span class="arr">→</span><span class="node gate">✋ gate<span class="ok">approved</span></span><span class="arr">→</span><span class="node act">act</span><span class="arr">→</span><span class="node done">✓ verified</span>
+        </div>
+        <div class="rails"><span class="no">✕ never DM customers</span><span>inside daily caps</span><span>every action logged</span></div>
+        <p class="vs-note">Interviews you first, stops at the gate for approval, and proves the job is done with a verifiable check.</p>
       </div>
     </div>
   </div>
