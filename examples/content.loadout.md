@@ -1,8 +1,5 @@
 # Content — Loadout
 
-> Formerly "Lead Magnet Post" — renamed 2026-07-11 (Ruz): the one Pro+ Loadout
-> carries the whole content system, personal + company-page lead magnets in one.
-
 ```yaml
 loadout: content
 version: 0.1
